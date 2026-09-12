@@ -97,8 +97,8 @@
     <div class="card">
       <div class="icon">🚶</div>
       <div class="label">Steps</div>
-      <div class="value">7,842</div>
-      <div class="goal">Goal: 7,000 steps</div>
+      <div class="value" id="steps">---</div>
+      <div class="goal">Goal: 10,000 steps</div>
     </div>
 
     <div class="card">
@@ -140,6 +140,16 @@
   </div>
 
 </div>
-
+  
+<script>
+  fetch('health-data.json')
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('steps').textContent =
+        Number(data.steps).toLocaleString();
+    });
+</script>
+  
+  
 </body>
 </html>
