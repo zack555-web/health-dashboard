@@ -1,155 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Health Dashboard</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f5f7fa;
-      color: #1f2937;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 40px 20px;
-    }
-
-    h1 {
-      margin-bottom: 5px;
-    }
-
-    .subtitle {
-      color: #6b7280;
-      margin-bottom: 30px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 18px;
-    }
-
-    .card {
-      background: white;
-      padding: 24px;
-      border-radius: 16px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-    }
-
-    .icon {
-      font-size: 28px;
-    }
-
-    .label {
-      color: #6b7280;
-      margin-top: 10px;
-      font-size: 14px;
-    }
-
-    .value {
-      font-size: 30px;
-      font-weight: bold;
-      margin-top: 6px;
-    }
-
-    .goal {
-      margin-top: 8px;
-      font-size: 13px;
-      color: #9ca3af;
-    }
-
-    .section {
-      margin-top: 35px;
-    }
-
-    .chart-placeholder {
-      background: white;
-      height: 250px;
-      border-radius: 16px;
-      padding: 25px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #9ca3af;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personal Dashboard</title>
+<style>body{margin:0;background:#f5f7fa;color:#1f2937;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:1000px;margin:auto;padding:40px 20px}h1{margin-bottom:8px}p{color:#6b7280;line-height:1.7}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-top:30px}.card{background:white;border-radius:16px;padding:24px;box-shadow:0 4px 15px #0000000f}a{color:#2563eb}a:focus-visible{outline:3px solid #2563eb;outline-offset:5px}h2{font-size:20px}</style>
 </head>
-
-<body>
-
-<div class="container">
-
-  <h1>Health Dashboard</h1>
-  <div class="subtitle">Daily health & fitness overview</div>
-
-  <div class="cards">
-
-    <div class="card">
-      <div class="icon">🚶</div>
-      <div class="label">Steps</div>
-      <div class="value" id="steps">---</div>
-      <div class="goal">Goal: 10,000 steps</div>
-    </div>
-
-    <div class="card">
-      <div class="icon">😴</div>
-      <div class="label">Sleep</div>
-      <div class="value">7h 21m</div>
-      <div class="goal">Goal: 7h 30m</div>
-    </div>
-
-    <div class="card">
-      <div class="icon">⚖️</div>
-      <div class="label">Weight</div>
-      <div class="value">74.0 kg</div>
-      <div class="goal">Goal: 67.0 kg</div>
-    </div>
-
-    <div class="card">
-      <div class="icon">📉</div>
-      <div class="label">Body Fat</div>
-      <div class="value">22.0%</div>
-      <div class="goal">Tracking progress</div>
-    </div>
-
-    <div class="card">
-      <div class="icon">🏋️</div>
-      <div class="label">Workout</div>
-      <div class="value">40 min</div>
-      <div class="goal">Goal: 2× / week</div>
-    </div>
-
-  </div>
-
-  <div class="section">
-    <h2>7 Day Activity</h2>
-
-    <div class="chart-placeholder">
-      Health data chart will appear here
-    </div>
-  </div>
-
+<body><main>
+<h1>Personal Dashboard</h1>
+<p>日々の記録を、ひとつの場所に。Main Dashboardは今後ここに追加します。</p>
+<div class="cards">
+<section class="card"><h2>Health</h2><p>健康・運動のダッシュボード</p><a href="personal/health/">Health Dashboardを開く →</a></section>
+<section class="card"><h2>English</h2><p>英語学習の記録 · 準備中</p><a href="personal/english/">English</a></section>
+<section class="card"><h2>Food</h2><p>食事管理 · 作成未定</p><a href="personal/food/">Food</a></section>
+<section class="card"><h2>Test</h2><p>Web制作・機能テスト用</p><a href="test/">テストエリア</a></section>
 </div>
-  
-<script>
-  fetch('health-data.json')
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById('steps').textContent =
-        Number(data.steps).toLocaleString();
-    });
-</script>
-  
-  
-</body>
+</main></body>
 </html>
