@@ -89,6 +89,7 @@
 
 <div class="container">
 
+  <a href="../../">← Personal Dashboard</a>
   <h1>Health Dashboard</h1>
   <div class="subtitle">Daily health & fitness overview</div>
 
@@ -142,11 +143,17 @@
 </div>
   
 <script>
-  fetch('health-data.json')
-    .then(response => response.json())
+  fetch('../../data/health-data.json', { cache: 'no-store' })
+    .then(response => {
+      if (!response.ok) throw new Error('Unable to load health data');
+      return response.json();
+    })
     .then(data => {
       document.getElementById('steps').textContent =
         Number(data.steps).toLocaleString();
+    })
+    .catch(() => {
+      document.getElementById('steps').textContent = 'Unavailable';
     });
 </script>
   
