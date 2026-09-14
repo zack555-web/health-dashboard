@@ -1,0 +1,6 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ページが見つかりません</title></head><body><h1>ページが見つかりません</h1><p><a href="/personal/index.html">Personal Dashboard</a> · <a href="/index.html">サイトの入口</a></p><script>
+const prefix = "/health-dashboard";
+const destinations = {"/":"/personal/index.html","/index.html":"/personal/index.html","/personal/":"/personal/index.html","/personal/index.html":"/personal/index.html","/personal/health/":"/personal/health/index.html","/personal/health/index.html":"/personal/health/index.html","/personal/english/":"/personal/english/index.html","/personal/english/index.html":"/personal/english/index.html","/personal/food/":"/personal/food/index.html","/personal/food/index.html":"/personal/food/index.html","/test/":"/test/index.html","/test/index.html":"/test/index.html"};
+if (location.pathname.startsWith(prefix + "/")) { const target = destinations[location.pathname.slice(prefix.length)]; if (target) location.replace(target + location.search + location.hash); }
+</script></body></html>
