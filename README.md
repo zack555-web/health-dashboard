@@ -1,39 +1,45 @@
 # Personal Dashboard
 
-## Structure
+## ページ構成
 
-- `/index.html`: Personal Dashboard entry point; Main Dashboard will be added here.
-- `/personal/health/`: existing Health Dashboard.
-- `/personal/english/`: planned English Dashboard.
-- `/personal/food/`: possible future Food Dashboard.
-- `/test/`: web experiments.
-- `/data/health-data.json`: canonical Health data.
-- `/health-data.json`: frozen migration snapshot for old read links; do not update this file. It is not synchronized.
+- `/index.html`：サイト全体の入口（Personal / Test）
+- `/personal/index.html`：Main Dashboard（集計表示は今後追加）
+- `/personal/health/index.html`：Health Dashboard
+- `/personal/english/index.html`：英語学習Dashboard（準備中）
+- `/personal/food/index.html`：食事管理（未定）
+- `/test/index.html`：Web制作テスト
+- `/data/health-data.json`：Healthデータの唯一の更新先
 
-## URLs
+公開先リポジトリは `zack555-web/zack555-web.github.io`。元の `health-dashboard` リポジトリを、履歴・ブランチを保持して改名しています。
 
-Site: https://zack555-web.github.io/health-dashboard/
+## 公開URL
 
-Health: https://zack555-web.github.io/health-dashboard/personal/health/
+- サイト：https://zack555-web.github.io/index.html
+- Main：https://zack555-web.github.io/personal/index.html
+- Health：https://zack555-web.github.io/personal/health/index.html
+- English：https://zack555-web.github.io/personal/english/index.html
+- データ：https://zack555-web.github.io/data/health-data.json
 
-Data: https://zack555-web.github.io/health-dashboard/data/health-data.json
+Healthは `../../data/health-data.json` を読みます。Health / English / Foodの戻るリンクは `../index.html`（Main）です。Mainの戻るリンクはサイト全体の入口です。
 
-The repository name and Pages base URL are unchanged. Paths above are relative to the repository root, not the github.io domain root. The old site URL remains the entry point with a Health link.
+## Shortcut（未運用）
 
-## Shortcut setup
+今後の読み書きには次のGitHub Contents APIを使います。
 
-The owner confirmed that the Shortcut is not yet in operation. Configure all future reads and writes to `data/health-data.json`. For the GitHub Contents API, use:
+`https://api.github.com/repos/zack555-web/zack555-web.github.io/contents/data/health-data.json`
 
-`https://api.github.com/repos/zack555-web/health-dashboard/contents/data/health-data.json`
+GETは `?ref=main`。PUTには `branch: main`、GETで取得したこのファイルの最新 `sha`、Base64化したJSONを `content` に指定します。旧ファイルのSHAは流用しません。認証情報はShortcut側に保持し、公開リポジトリに置きません。実機でのShortcut実行確認は未実施です。
 
-Read with `?ref=main`. For a PUT, use `branch: main`, the current SHA returned by GET for this exact path, and Base64-encoded JSON in `content`. Never reuse the SHA of the old root file. Keep credentials in the Shortcut, never in this repository. An iPhone run is still required to verify the eventual Shortcut.
+## 旧URLの互換性
 
-## Migration and recovery (2026-09-14)
+`/health-dashboard/index.html` と `/health-dashboard/` は新しいMainに案内します。旧Health / English / Food / TestのHTML URLは `404.html` で対応する新URLへ転送します（JavaScript有効時）。通常の存在しないURLは404のままです。
 
-Original commit: `c81089dfc17a065a4c0f95f63836ac271e42d8c1`.
+`/health-data.json`、`/health-dashboard/health-data.json`、`/health-dashboard/data/health-data.json` は移行時の固定スナップショットです。自動同期しません。更新は必ず `/data/health-data.json` に行ってください。`health-dashboard/` は旧リンク互換用のみで、Dashboard本体は置きません。
 
-Backup branch: `codex/backup-before-personal-20260914`.
+## バックアップ・復旧
 
-The JSON is copied byte-for-byte without changing its schema or values. Health now fetches `../../data/health-data.json`; its display and fixed sample values are preserved. The root JSON remains only as a compatibility snapshot. Once any old consumers are retired, it can be removed.
+最初の移行前：`c81089dfc17a065a4c0f95f63836ac271e42d8c1`（`codex/backup-before-personal-20260914`）。
 
-To undo the layout migration, revert the migration merge commit. Preserve and back up any data updates made after migration first. Do not reset the whole repository to the backup branch, which would discard later data. To restore the original UI only, copy `index.html` from the backup branch and point its fetch to `data/health-data.json` so that it continues to read current data.
+今回の配置修正前：`97b2d1220f68c81ad30cd15a607a68797b45f855`。初回移行の内容は `codex/personal-dashboard` ブランチにも残っています。
+
+Healthデータと既存の表示項目は変更していません。復旧時には、まず移行後に追加されたデータを別途保存してください。UI修正を戻す場合は該当PRのマージをrevertします。リポジトリ全体を古い状態へresetすると後日のデータが失われるため避けてください。公開URLを旧形式へ戻すには、ファイルのrevertだけでなくリポジトリ名とPagesの公開元も別途確認する必要があります。
